@@ -26,13 +26,13 @@ const RevenueAggregator = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response1 = await fetch('http://localhost:3000/products1');
+        const response1 = await fetch('https://mvt.onrender.com/products1');
         const branch1Data = await response1.json();
 
-        const response2 = await fetch('http://localhost:3000/products2');
+        const response2 = await fetch('https://mvt.onrender.com/products2');
         const branch2Data = await response2.json();
 
-        const response3 = await fetch('http://localhost:3000/products3');
+        const response3 = await fetch('https://mvt.onrender.com/products3');
         const branch3Data = await response3.json();
 
 
