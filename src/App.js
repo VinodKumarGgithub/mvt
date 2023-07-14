@@ -108,9 +108,12 @@ const RevenueAggregator = () => {
           </Tr>
         </Thead>
         <Tbody>
-          {
+          {filteredProducts.length===0? 
+          <Tr> 
+            <Td>No result</Td>
+          </Tr> :
            filteredProducts.map((product,i) => (
-            <Tr key={product.name}>
+            <Tr key={product.name} >
               <Td>{product.name}</Td>
               <Td>{Number.parseInt(product.unitPrice*product.sold)}</Td>
             </Tr>
