@@ -19,6 +19,7 @@ import './App.css'
 
 const RevenueAggregator = () => {
   const [products, setProducts] = useState([]);
+  const [isLoading, setLoading] = useState(false);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [filter, setFilter] = useState('');
   const [totalRevenue, setTotalRevenue] = useState(0);
@@ -26,6 +27,7 @@ const RevenueAggregator = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setLoading(true)
         const response1 = await fetch('https://mvt.onrender.com/products1');
         const branch1Data = await response1.json();
 
@@ -58,8 +60,9 @@ const RevenueAggregator = () => {
 
         setProducts(AllProducts);
         setFilteredProducts(AllProducts);
-        
+        setLoading(false)
       } catch (error) {
+        setLoading(false)
         console.error('Error fetching data:', error);
       }
     };
@@ -68,7 +71,7 @@ const RevenueAggregator = () => {
   }, []);
 
   useEffect(() => {
-    // Filter products based on The filter text
+    // Filter products
     const filtered = products.filter((product) =>
       product.name.toLowerCase()
       .includes(filter.toLowerCase())
@@ -83,13 +86,13 @@ const RevenueAggregator = () => {
 
   const handleFilterChange = (e) => {
     setFilter(e.target.value);
-    console.log(e.target.value,'sdcsd');
-    // formatNumber()
   };
 
  
 
   return (
+  <>
+  { isLoading? <Center>Loading....</Center> :
     <div>
      <Box  w='80%'  m='auto' my='2em'>
       <label style={{fontWeight:'bold', opacity:'0.5'}}>Filter by Name :</label>
@@ -122,7 +125,8 @@ const RevenueAggregator = () => {
         </Tfoot>
       </Table>
       </TableContainer>
-    </div>
+    </div>}
+    </>
   );
 };
 
